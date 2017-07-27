@@ -2,10 +2,6 @@
 port=9090
 internal=1
 
-[common]
-
 [mysql]
 monitor_user=root
 monitor_password=root.123
-
-[redis]

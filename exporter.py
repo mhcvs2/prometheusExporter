@@ -16,6 +16,8 @@ def main():
     configfile = sys.argv[1]
     if not os.path.isfile(configfile):
         log.error("%s is not a file." %configfile)
+    if not os.path.exists(configfile):
+        log.error("%s doesn't exist." %configfile)
     cnf = ConfigParser()
     cnf.read(configfile)
     port = cnf.getint("exporter","port")

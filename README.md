@@ -15,5 +15,7 @@ operate
 <p>
 Run "python exporter.py ./exporter.cnf"<br>
 Then this exporter will run, and function in handler.py can get a dict parameter like {par1:value1,par2:value2}
+<br>
+Visit http://localhost:9090/metrics
 </p>
     

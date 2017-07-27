@@ -66,7 +66,7 @@ def run(port, internal, exporter):
                     apply(getattr(info["handler_module"], fun),(info["par"],))
             time.sleep(internal)
     except KeyboardInterrupt:
-        log.info("DB exporter exit.")
+        log.info("Exporter exit.")
 
 if __name__ == '__main__':
     sys.exit(

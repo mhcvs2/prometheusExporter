@@ -3,8 +3,9 @@ Scalable Prometheus Exporter
 
 operate
 -----------
-* create a python package with name "name_exporter"
-* write defination in metrics.py and handler function in handler.py
+* create a python package with name "name_exporter", like "mysql_exporter"
+* write defination in metrics.py, metrics name  must start with "mysql_"
+* handler function in handler.py, function name must start with metrics name, end with "_handler"
 * update exporter.cnf
    <pre><code>
    [name]

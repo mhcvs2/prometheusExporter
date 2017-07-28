@@ -10,7 +10,7 @@ class MySQL(object):
     MySQL represents the connection to and configuration of the MySQL
     process and its clients.
     """
-    def __init__(self, db=None,user="root",password="root.123"):
+    def __init__(self, db=None,user="root",password="root.123", port=None, host=None):
         self.db = db
         self.user = user
         self.password = password
@@ -18,6 +18,8 @@ class MySQL(object):
         self.ip = "127.0.0.1"
         self._conn = None
         self._query_buffer = OrderedDict()
+        self.port = port
+        self.host = host
 
     @property
     def conn(self):
@@ -41,13 +43,22 @@ class MySQL(object):
         """
         while timeout > 0:
             try:
-                sock = '/var/lib/mysql/mysql.sock'
-                return mysqlconn.connect(unix_socket=sock,
-                                         user=user,
-                                         password=password,
-                                         database=database,
-                                         charset='utf8',
-                                         connection_timeout=timeout)
+                if self.host and self.port:
+                    return mysqlconn.connect(host=self.host,
+                                             port=self.port,
+                                             user=user,
+                                             password=password,
+                                             database=database,
+                                             charset='utf8',
+                                             connection_timeout=timeout)
+                else:
+                    sock = '/var/lib/mysql/mysql.sock'
+                    return mysqlconn.connect(unix_socket=sock,
+                                             user=user,
+                                             password=password,
+                                             database=database,
+                                             charset='utf8',
+                                             connection_timeout=timeout)
             except MySQLError as ex:
                 timeout = timeout - 1
                 if timeout == 0:
